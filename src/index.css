@@ -1,106 +1,99 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 :root {
   color-scheme: dark;
 
-  --mg-bg: #141318;
-  --md-surface: #141318;
-  --md-surface-container-low: #1c1b20;
-  --md-surface-contanier: #211f26;
-  --md-surface-container-high: #2b2930;
-  --md-outline: #49454f;
-  --md-outline-variant: #333039;
+  --md-sys-color-primary: #e8aaa4;
+  --md-sys-color-on-primary: #561f1b;
+  --md-sys-color-primary-container: #71332d;
+  --md-sys-color-on-primary-container: #ffdad6;
 
-  --md-primary: #d0bcff;
-  --md-on-primary: #381e72;
-  --md-primary-container: #4f378b;
-  --md-on-primary-container: #eaddff;
+  --md-sys-color-secondary: #d8c2bf;
+  --md-sys-color-surface-container: #211f1f;
 
-  --md-text: #e6e0e9;
-  --md-text-secondary: #cac4d0;
-  --md-muted-text: #938f99;
+  --md-sys-color-surface: #141313;
+  --md-sys-color-surface-container: #211f1f;
+  --md-sys-color-surface-container-high: #2b2828;
 
-  --md-error: #f2b8b5;
+  --md-sys-color-on-surface: #ede0de;
+  --md-sys-color-on-surface-variant: #d0c3c0;
+
+  --md-sys-color-outline: #a39794;
+  --md-sys-color-outline-variant: #514543;
+
+  --md-sys-color-error: #ffb4ab;
+
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-ui);
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+}
+
+
+:root {
+  color-scheme: dark;
+
+  /* Typography */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-ui);
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+
+  /* SumiLedger surfaces */
+  --md-bg: #141313;
+  --md-surface: #1c1a1a;
+  --md-surface-container-low: #1c1a1a;
+  --md-surface-container: #211f1f;
+  --md-surface-container-high: #2b2828;
+
+  /* Muted red palette */
+  --md-primary: #e8aaa4;
+  --md-on-primary: #561f1b;
+  --md-primary-container: #71332d;
+  --md-on-primary-container: #ffdad6;
+
+  /* Text */
+  --md-text: #ede0de;
+  --md-text-secondary: #d0c3c0;
+  --md-text-muted: #a39794;
+
+  /* Supporting colors */
+  --md-outline: #a39794;
+  --md-outline-variant: #514543;
+  --md-error: #ffb4ab;
   --md-success: #a8d5b5;
   --md-warning: #e8c78a;
 
-  --bg: var(--md-bg);
-  --surface: var(--md-surface-contanier);
-  --border: var(--md-outline-variant);
-  --text: var(--md-text);
+  /* Material Web system tokens */
+  --md-sys-color-primary: #e8aaa4;
+  --md-sys-color-on-primary: #561f1b;
+  --md-sys-color-primary-container: #71332d;
+  --md-sys-color-on-primary-container: #ffdad6;
+  --md-sys-color-surface: #141313;
+  --md-sys-color-surface-container: #211f1f;
+  --md-sys-color-surface-container-high: #2b2828;
+  --md-sys-color-on-surface: #ede0de;
+  --md-sys-color-on-surface-variant: #d0c3c0;
+  --md-sys-color-outline: #a39794;
+  --md-sys-color-outline-variant: #514543;
+  --md-sys-color-error: #ffb4ab;
 
-  --text-secondary: var(--md-text-secondary);
-  --accent: var(--md-primary);
+  /* Shape */
+  --md-shape-sm: 8px;
+  --md-shape-md: 12px;
+  --md-shape-lg: 20px;
+  --md-shape-full: 999px;
 
-  --font-ui: Inter, --apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-
-  --radius-sm: 5px;
-  --radius-md: 9px;
-  --radius-lg: 13px;
-  --control-height: 40px;
-  --sidebar-width: 240px;
+  /* Spacing */
+  --md-space-1: 4px;
+  --md-space-2: 8px;
+  --md-space-3: 12px;
+  --md-space-4: 16px;
+  --md-space-5: 20px;
+  --md-space-6: 24px;
+  --md-space-8: 32px;
+  --md-space-10: 40px;
+  --md-space-12: 48px;
 
   font-family: var(--font-ui);
   color: var(--md-text);
   background: var(--md-bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-
-}
-
-* {
-  box-sizing: border-box;
-}
-html,
-body,
-#root {
-  min-width: 320px;
-  min-height: 100%;
-  margin: 0;
-}
-
-body { 
-  min-height: 100vh;
-  background: var(--md-bg);
-  color: var(--md-text);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
-}
-button {
-  cursor: pointer;
-
-}
-
-button:focus-visible,
-input:focus-visible,
-select:focus-visible
-textarea:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--md-primary);
-  outline-offset: 2px;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-::selection { 
-  color: var(--md-on-primary);
-  background: var(--md-primary);
-}
-
-.numeric {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
 }

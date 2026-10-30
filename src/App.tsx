@@ -33,22 +33,22 @@ function LoginScreen({
      setAuthError: (value: string) => void
      confirmPassword: string
      setConfirmPassword: (value: string) => void
+
     }) {
   return (
     <main className='auth-page'>
       <section className='auth-form-panel'>
         <div className={`auth-form ${isRegistering ? 'is-registering' : 'islogin'}`}
             key={isRegistering ? 'register' : 'login'} >
-          <span className='brand-mark'>C</span>
-          <p className='eyebrow'>SumiLedger</p>
-          <h1>{isRegistering ? 'Create Account' : 'Sign In'}</h1>
+          <span className='auth-brand'>SumiLedger</span>
           <p className='auth-description'>
             HURRY UP! THE BOOKS ARE WAITING FOR YOU
           </p>
           {authError && (
-            <p className='auth-error' role="alert">
-              {authError}
-            </p>
+              <div className="auth-error" role="alert">
+              <span aria-hidden="true">ⓘ</span>
+             <span>{authError}</span>
+            </div>
           )}
           <form
   className="auth-fields"
@@ -57,44 +57,58 @@ function LoginScreen({
     onLogin()
   }}
 >
-          <label htmlFor="email"> Ey MATE YOUR MAIL</label>
-          <input
-          id="email"
+          <md-outlined-text-field
+          label="Email Address"
           type="email"
-          autoComplete='email'
           placeholder='you@example.com'
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
           required
+          onInput={(event) => {
+            const field = event.currentTarget as HTMLElement & {
+              value: string
+            }
+            setEmail(field.value)
+          }
+
+          }
           />
-          <label htmlFor='password'>Password</label>
-          <input
-          id='password'
+          <md-outlined-text-field
+          label='password'
           type='password'
-          autoComplete={isRegistering ? 'new-password' : 'current-password'}
           value={password}
-          onChange={(event) => setPassword(event.target.value)} 
-          required
+                 required
+          onChange={(event) => {
+            const field = event.currentTarget as HTMLElement & {
+              value: string
+            }
+          
+          setPassword(field.value)
+          }}
+
+   
           /> 
            {isRegistering && (
-           <>
-           <label htmlFor='confrim-password'>Confirm password</label>
-           <input
-                id="confirm-passord"
+            <>
+           <md-outlined-text-field
+                label="confirm-password"
                 type="password"
-                autoComplete='new-password'
                 value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
                 minLength={12}
-               required
-             />
+                required
+                onChange={(event) =>
+                  { const field = event.currentTarget as HTMLElement & {
+                    value: string
+                  }
+                  setConfirmPassword(field.value)
+                }}
+               />
            </>
          )}
-          <button type="submit" className='auth-submit'>
-           {isRegistering ? 'Creatr Account' : 'Sign In Brochacho'}
-          </button>
+          <md-filled-button type="submit" className='auth-submit'>
+           {isRegistering ? 'Create Account' : 'Let Me In Pliz'}
+          </md-filled-button>
           </form>
-          <button 
+          <md-text-button
           type='button'
           onClick={() =>  {
             setIsRegistering(!isRegistering)
@@ -103,7 +117,7 @@ function LoginScreen({
             {isRegistering 
             ? 'Already have an account? Sign In'
             : 'New here? Create an account'}
-          </button>
+          </md-text-button>
         </div>
       </section>
     </main>
