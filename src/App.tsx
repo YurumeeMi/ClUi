@@ -3,10 +3,10 @@ import { useState   } from 'react'
 import { api } from './lib/api'
 
 const navigation = [
-  {label: 'Overview', icon: '◫'},
-  {label: 'Accounts', icon: '▤'},
-  {label: 'Journal entries', icon: '≡'},
-  {label: 'Reports', icon: '▥'},
+  {label: 'Overview', icon: 'space_dashboard'},
+  {label: 'Accounts', icon: 'account_balance_wallet'},
+  {label: 'Journal entries', icon: 'receipt_long'},
+  {label: 'Reports', icon: 'monitoring'},
 ]
 
 function LoginScreen({
@@ -158,6 +158,7 @@ function App() {
    const [isRegistering, setIsRegistering] = useState(false)
    const [confirmPassword, setConfirmPassword] = useState('')
    const [authError, setAuthError] = useState('')
+   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   return screen === 'login' ? (
     <LoginScreen 
     email={email}
@@ -175,11 +176,23 @@ function App() {
   ) :  (
     
     <div className='app-shell'>
-      <aside className='sidebar'>
-        <a className='brand' href="/">
-        <span className='brand-mark'>C</span>
-        <span>SumiLedger</span>
-        </a>
+      <aside className={`sidebar ${sidebarExpanded ? 'expanded' : `collapsed`}`}>
+        <div className='sidebar-header'>
+          <a className='brand' href='/'>
+          <span className='brand-name'>SumiLedger</span>
+          </a>
+
+          <button 
+                 className='sidebar-toggle'
+                 type="button"
+                 onClick={() => setSidebarExpanded(value => !value)}
+                 aria-label={sidebarExpanded ? 'Collapse navigation' : 'Expanded navigation'}
+                 aria-expanded={sidebarExpanded}
+                 >
+                  {sidebarExpanded ? '☰' : '☰'}
+                  </button>          
+
+        </div>
         <div className='workspace-label'>WORKSPACE</div>
         <button className='workspace-switcher'>
           <span className='workspace-avatar'>C</span>
@@ -194,7 +207,7 @@ function App() {
               href="#"
               className={`nav-item ${index === 0 ? 'active' : ''}`}
               >
-                <span className='nav-icon' aria-hidden="true">
+                <span className='nav-icon material-symbols-rounded' aria-hidden="true">
                   {item.icon}
 
                 </span>

@@ -77,9 +77,9 @@
   --md-sys-color-error: #ffb4ab;
 
   /* Shape */
-  --md-shape-sm: 8px;
-  --md-shape-md: 12px;
-  --md-shape-lg: 20px;
+  --md-shape-sm: 60px;
+  --md-shape-md: 60px;
+  --md-shape-lg: 60px;
   --md-shape-full: 999px;
 
   /* Spacing */
