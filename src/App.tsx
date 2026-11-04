@@ -1,5 +1,5 @@
 import './App.css'
-import { useState   } from 'react'
+import { useState, useEffect  } from 'react'
 import { api } from './lib/api'
 
 const navigation = [
@@ -153,13 +153,21 @@ function App() {
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
 
-   const [screen, setScreen] = useState<'login' | 'dashboard'>('login')
-
+   const [screen, setScreen] = useState< 'loading' |'login' | 'dashboard'>('loading');   useEffect(() => {
+    api.me()
+    .then(() => setScreen('dashboard'))
+    .catch(() => setScreen('login'))
+   }, [])
+   
    const [isRegistering, setIsRegistering] = useState(false)
    const [confirmPassword, setConfirmPassword] = useState('')
    const [authError, setAuthError] = useState('')
    const [sidebarExpanded, setSidebarExpanded] = useState(true);
-  return screen === 'login' ? (
+
+   if (screen === 'loading') {
+    return <main className="auth-page"> Sessions is getting ready bad boi!</main>
+   }
+   return screen === 'login' ? (
     <LoginScreen 
     email={email}
     setEmail={setEmail}

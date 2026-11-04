@@ -4,7 +4,7 @@ const API_BASE_URL = (
 ).replace(/\/$/, '')
 
 type LoginResponse = {
-  id: string
+
   token: string
 }
 
@@ -19,7 +19,6 @@ type MeResponse = {
 async function request<T>(
   path: string,
   options: RequestInit = {},
-  token?: string,
 ): Promise<T> {
   const headers = new Headers(options.headers)
 
@@ -27,13 +26,11 @@ async function request<T>(
     headers.set('Content-Type', 'application/json')
   }
 
-  if (token) {
-    headers.set('Authorization', `Bearer ${token}`)
-  }
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers,
+    credentials: 'include',
   })
 
   if (!response.ok) {
@@ -70,11 +67,11 @@ export const api = {
     })
   },
 
-  me(token: string) {
-    return request<MeResponse>('/auth/me', {}, token)
+  me() {
+    return request<MeResponse>('/auth/me', {})
   },
 
-  logout(token: string) {
-    return request<void>('/auth/logout', { method: 'POST' }, token)
+  logout() {
+    return request<void>('/auth/logout', { method: 'POST' })
   },
 }
