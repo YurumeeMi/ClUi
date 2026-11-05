@@ -838,3 +838,114 @@ body {
     transform: translateY(0) scale(1);
   }
 }
+/* Sidebar refinement */
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.navigation .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--md-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.navigation .nav-item:hover {
+  background: var(--md-surface-container-high);
+  color: var(--md-text);
+}
+
+.navigation .nav-item.active {
+  background: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+}
+
+.nav-icon,
+.workspace-chevron,
+.sidebar-toggle .material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: 400;
+  font-style: normal;
+  font-feature-settings: 'liga';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  line-height: 1;
+}
+
+.nav-icon {
+  flex: 0 0 24px;
+  font-size: 22px;
+}
+
+.workspace-switcher {
+  border: 1px solid var(--md-outline-variant);
+  color: var(--md-text);
+  cursor: pointer;
+}
+
+.workspace-chevron {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.sidebar-toggle {
+  display: grid;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--md-surface-container-high);
+  color: var(--md-text);
+  cursor: pointer;
+}
+
+.sidebar-toggle .material-symbols-rounded {
+  font-size: 21px;
+}
+
+.navigation .nav-item {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--md-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.navigation .nav-item:hover {
+  background: var(--md-surface-container-high);
+}
+
+.navigation .nav-item.active {
+  background: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+}
+
+.nav-icon {
+  font-family: 'Material Symbols Rounded';
+  font-size: 22px;
+  line-height: 1;
+  font-feature-settings: 'liga';
+}
