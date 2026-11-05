@@ -148,8 +148,24 @@ function App() {
       error instanceof Error ? error.message : 'something went wrong'
      )
     }
-    
   }
+
+   async function handleLogout() {
+    setLogoutError('')
+
+    try { 
+      await api.logout()
+    setAccountMenuOpen(false)
+    setPassword('')
+  setScreen('login')
+ } catch (error) { 
+  setLogoutError(
+    error instanceof Error ? error.message : 'I am Stuck Ig!'
+  )
+ }
+    
+    
+}
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
 
@@ -161,6 +177,8 @@ function App() {
    
    const [isRegistering, setIsRegistering] = useState(false)
    const [confirmPassword, setConfirmPassword] = useState('')
+   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
+   const [logoutError, setLogoutError] = useState('')
    const [authError, setAuthError] = useState('')
    const [sidebarExpanded, setSidebarExpanded] = useState(true);
 
@@ -233,10 +251,31 @@ function App() {
       <main className='main-content'>
         <header className='topbar'>
           <span className='breadcrumb'> Workspace / Overview</span>
-          <button className='avatar-button' aria-label="User account">
-            Y
-          </button>
+          <div className="account-menu">
+            <button 
+            className="avatar-button"
+            type='button'
+            aria-label='User account'
+            aria-expanded={accountMenuOpen}
+            onClick={() => setAccountMenuOpen(value => !value)}>
+              Y
+            </button>
 
+            {accountMenuOpen && (
+              <div className="account-menu-dropdown" role='menu'>
+                {logoutError && (
+                  <p role="alert">{logoutError}</p>
+                )}
+            <button
+            type="button"
+            role="menuitem"
+            onClick={handleLogout}>
+              Signout
+            </button>
+                    
+          </div>
+            )}
+          </div>
         </header>
         <section className='page-content'>
           <div className='page-heading'>

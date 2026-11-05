@@ -4,8 +4,7 @@ const API_BASE_URL = (
 ).replace(/\/$/, '')
 
 type LoginResponse = {
-
-  token: string
+  id: string
 }
 
 type RegisterResponse = {
@@ -14,6 +13,28 @@ type RegisterResponse = {
 
 type MeResponse = {
   id: string
+}
+
+export type Organization = {
+  id: string
+  name: string
+  role: string
+}
+
+export type Account = {
+  id: string
+  code: string
+  name: string
+  account_type: string
+  is_active: boolean
+}
+
+type OrganizationResp = {
+  organizations: Organization[]
+}
+
+type AccountsResp = {
+  accounts: Account[]
 }
 
 async function request<T>(
@@ -26,7 +47,6 @@ async function request<T>(
     headers.set('Content-Type', 'application/json')
   }
 
-
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers,
@@ -37,11 +57,15 @@ async function request<T>(
     throw new Error(
       response.status === 401
         ? 'Invalid email or password.'
-        : response.status === 409
-          ? 'An account with this email already exists.'
-          : response.status === 400
-            ? 'Please check the information you entered.'
-            : `Request failed (${response.status}).`,
+        : response.status === 403
+          ? 'You do not have permission to perform this action.'
+          : response.status === 404
+            ? 'The requested resource was not found.'
+            : response.status === 409
+              ? 'An account with this email already exists.'
+              : response.status === 400
+                ? 'Please check the information you entered.'
+                : `Request failed (${response.status}).`,
     )
   }
 
@@ -68,10 +92,39 @@ export const api = {
   },
 
   me() {
-    return request<MeResponse>('/auth/me', {})
+    return request<MeResponse>('/auth/me')
   },
 
   logout() {
-    return request<void>('/auth/logout', { method: 'POST' })
+    return request<void>('/auth/logout', {
+      method: 'POST',
+    })
+  },
+
+  organizations() {
+    return request<OrganizationResp>('/organizations')
+  },
+
+  accounts(organizationId: string) {
+    return request<AccountsResp>(
+      `/organizations/${organizationId}/accounts`,
+    )
+  },
+
+  createAccount(
+    organizationId: string,
+    account: {
+      code: string
+      name: string
+      account_type: string
+    },
+  ) {
+    return request<{ id: string }>(
+      `/organizations/${organizationId}/accounts`,
+      {
+        method: 'POST',
+        body: JSON.stringify(account),
+      },
+    )
   },
 }
